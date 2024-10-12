@@ -1,0 +1,16 @@
+header {
+    border-bottom: 2px solid #f1f1f1;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  .btn-outline-primary {
+    border-radius: 25px;
+  }
+  
