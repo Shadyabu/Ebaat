@@ -17,7 +17,7 @@ const Header = () => {
           />
           <div>
             <h1 className="h4 mb-0">Ebaat</h1>
-            <p className="mb-0 small">Secure and accessible escrow payments </p>
+            <p className="mb-0 small">Secure, accessible escrow payments </p>
           </div>
         </div>
         
