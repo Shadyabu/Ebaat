@@ -33,9 +33,7 @@ const UserPayments = () => {
     <div className="container mt-5">
       <h1 className="text-center mb-4">All Payments for Address: {address}</h1>
       {payments.map((payment) => (
-          <Link key={payment.id} to={`/payment/${payment.id}`} className="text-decoration-none">
-            <PaymentTemplate value={payment}/>
-          </Link>
+        <PaymentTemplate value={payment}/>
       ))}
     </div>
   );
