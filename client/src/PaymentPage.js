@@ -11,7 +11,7 @@ const PaymentPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/payment/${id}`);
+        const response = await fetch(`http://localhost:5001/payment/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch payment data');
         }

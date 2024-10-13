@@ -11,7 +11,7 @@ const UserPayments = () => {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/payments/${address}`);
+        const response = await fetch(`http://localhost:5001/payments/${address}`);
         if (!response.ok) {
           throw new Error('Failed to fetch payments');
         }

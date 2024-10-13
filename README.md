@@ -1,8 +1,6 @@
 # Ebaat
 
-Use case for cross border payments and exchanging EGP into other currencies.
-
-Use case for cross border payments and exchanging EGP into other currencies.
+Use case for cross border escrow payments.
 
 # Soroban Project
 
@@ -27,3 +25,16 @@ work -->
 storage:
 
 https://developers.stellar.org/docs/build/guides/storage
+
+
+HOW TO RUN:
+
+in the client folder:
+npm install
+
+npm start
+
+
+in the ebaat folder:
+npm install
+node server.js
