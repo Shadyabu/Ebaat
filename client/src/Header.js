@@ -16,7 +16,7 @@ const Header = () => {
               src={logo}
               alt="Logo"
               className="img-fluid"
-              style={{ width: '70px', height: '70px', marginRight: '15px' }}
+              style={{ width: '50px', height: '50px', marginRight: '15px' }}
             />
             <div>
               <h1 className="h4 mb-0">Ebaat</h1>
