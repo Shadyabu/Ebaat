@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 const PaymentTemplate = ({ value, onPaymentUpdate }) => {
 
@@ -46,6 +47,7 @@ const PaymentTemplate = ({ value, onPaymentUpdate }) => {
       <div className="card shadow-lg border-0">
         <div className="card-body p-4">
           <h1 className="text-center mb-4">Payment Details</h1>
+          <Link key={value.id} to={`/payment/${value.id}`}>
           <div className="row mb-3">
             <div className="col-md-6">
               <h5 className="mb-1 text-muted">Payment Reference</h5>
@@ -56,6 +58,7 @@ const PaymentTemplate = ({ value, onPaymentUpdate }) => {
               <h2 className="fw-bold">${value.amount}</h2>
             </div>
           </div>
+          </Link>
           <div className="d-flex justify-content-between mt-4">
             {value.paid === 0 ? (
               <button className="btn btn-primary btn-lg" onClick={handlePayClick}>

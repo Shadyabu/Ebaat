@@ -41,6 +41,7 @@ app.get('/payment/:id', (req, res) => {
 });
 
 // New route to mark a payment as paid
+// New route to mark a payment as paid
 app.put('/payment/:id/pay', (req, res) => {
   const { id } = req.params;
   const query = `UPDATE transfers SET paid = 1 WHERE id = ?`;
@@ -53,6 +54,26 @@ app.put('/payment/:id/pay', (req, res) => {
     res.json({ message: 'Payment marked as paid', id });
   });
 });
+
+// Route to delete a payment by ID
+app.delete('/payment/:id', (req, res) => {
+  const { id } = req.params;
+  const query = `DELETE FROM transfers WHERE id = ?`;
+
+  db.run(query, [id], function (err) {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+
+    if (this.changes === 0) {
+      return res.status(404).json({ error: 'Payment not found' });
+    }
+
+    res.json({ message: 'Payment deleted', id });
+  });
+});
+
+
 
 // Route to fetch all payments by user address
 app.get('/payments/:address', (req, res) => {
