@@ -1,7 +1,45 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const PaymentTemplate = ({ value }) => { // Destructure value from props
+const PaymentTemplate = ({ value, onPaymentUpdate }) => {
+
+  const handlePayClick = async () => {
+    try {
+      const response = await fetch(`http://localhost:5001/payment/${value.id}/pay`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        onPaymentUpdate(); // Call parent function to update the payment status
+      } else {
+        console.error('Failed to update payment status');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    window.location.reload();
+  };
+
+  const handleReleaseClick = async () => {
+    try {
+      const response = await fetch(`http://localhost:5001/payment/${value.id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        onPaymentUpdate(); // Refresh or navigate after deletion
+      } else {
+        console.error('Failed to delete payment');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    window.location.reload();
+
+  };
 
   return (
     <div className="container mt-5">
@@ -20,9 +58,13 @@ const PaymentTemplate = ({ value }) => { // Destructure value from props
           </div>
           <div className="d-flex justify-content-between mt-4">
             {value.paid === 0 ? (
-              <button className="btn btn-primary btn-lg">Pay</button>
+              <button className="btn btn-primary btn-lg" onClick={handlePayClick}>
+                Pay
+              </button>
             ) : (
-              <button className="btn btn-success btn-lg">Release Payment</button>
+              <button className="btn btn-success btn-lg" onClick={handleReleaseClick}>
+                Release Payment
+              </button>
             )}
           </div>
         </div>
