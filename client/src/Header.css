@@ -14,3 +14,7 @@ header {
     border-radius: 25px;
   }
   
+  a{
+    color: #111111;
+    text-decoration: none;
+  }
