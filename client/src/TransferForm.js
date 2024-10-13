@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 const TransferForm = ({ onSubmit }) => {
-  const [senderWallet, setSenderWallet] = useState('');
-  const [receiverWallet, setReceiverWallet] = useState('');
   const [amount, setAmount] = useState('');
+  const [reference, setReference] = useState('');
+  const ACCOUNT_ADDRESS = 'GC4UW5AKNTANSVJP7A3FDRPGIPMB4H5SX2LRTXNYUUA7R5NB2F4QON72';
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Basic validation
-    if (!senderWallet || !receiverWallet || !amount) {
-      alert('All fields are required.');
-      return;
-    }
 
     if (Number(amount) <= 0) {
       alert('Amount must be greater than zero.');
       return;
     }
-
-    // Call the onSubmit function passed as a prop
-    onSubmit({
-      senderWallet,
-      receiverWallet,
-      amount: Number(amount),
-    });
-
-    // Clear the form
-    setSenderWallet('');
-    setReceiverWallet('');
-    setAmount('');
+    try {
+        const response = await fetch('http://localhost:5000/transfer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            reference,
+            ACCOUNT_ADDRESS,
+            amount: Number(amount),
+          }),
+        });
+    
+        const data = await response.json();
+        console.log('Transfer successful:', data);
+    
+        setAmount('');
+        setReference('');
+      } catch (error) {
+        console.error('Error during transfer:', error);
+      }
   };
 
   return (
@@ -41,34 +45,19 @@ const TransferForm = ({ onSubmit }) => {
             <div className="card-body p-4">
               <h2 className="text-center mb-4">Transfer Funds</h2>
               <form onSubmit={handleSubmit}>
-                <div className="form-group mb-3">
-                  <label htmlFor="senderWallet" className="form-label">
-                    Sender Wallet ID
+              <div className="form-group mb-3">
+                  <label htmlFor="reference" className="form-label">
+                    Payment reference
                   </label>
                   <input
                     type="text"
-                    id="senderWallet"
+                    id="reference"
                     className="form-control"
-                    value={senderWallet}
-                    onChange={(e) => setSenderWallet(e.target.value)}
-                    placeholder="Enter sender wallet ID"
+                    value={reference}
+                    onChange={(e) => setReference(e.target.value)}
+                    placeholder="Enter payment reference"
                   />
                 </div>
-
-                <div className="form-group mb-3">
-                  <label htmlFor="receiverWallet" className="form-label">
-                    Receiver Wallet ID
-                  </label>
-                  <input
-                    type="text"
-                    id="receiverWallet"
-                    className="form-control"
-                    value={receiverWallet}
-                    onChange={(e) => setReceiverWallet(e.target.value)}
-                    placeholder="Enter receiver wallet ID"
-                  />
-                </div>
-
                 <div className="form-group mb-3">
                   <label htmlFor="amount" className="form-label">
                     Amount

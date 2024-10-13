@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TransferForm from './TransferForm';
+import ReleaseEscrow from './ReleaseEscrow';
 
 
 const App = () => {
@@ -25,8 +26,10 @@ const App = () => {
     <div className="container">
       <h1 className="text-center mt-5">Escrow App</h1>
       <TransferForm onSubmit={handleTransferSubmit} />
+      {/* <ReleaseEscrow /> */}
     </div>
   );
 };
-
+ 
 export default App;
+
